@@ -1,6 +1,3 @@
-<div align='center'>
-
-<img src=https://private-user-images.githubusercontent.com/165794644/518326962-06e42d5b-2776-4bdc-8fb4-64ca46a4b159.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjQwMjAyNzEsIm5iZiI6MTc2NDAxOTk3MSwicGF0aCI6Ii8xNjU3OTQ2NDQvNTE4MzI2OTYyLTA2ZTQyZDViLTI3NzYtNGJkYy04ZmI0LTY0Y2E0NmE0YjE1OS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUxMTI0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MTEyNFQyMTMyNTFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT02ZTkyMGFlNmI5ZGM4NTRjNTM2NTljMTM5NzJhYjU5NmU3YWJiMmQ1YTY4ZDI0N2Q3Y2Q5MmZiMzdlM2U5YjNkJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.Nv4wF1KO7qM46ZsvStYZidpNAXOvx5XgQ8ivpPLnqAQ alt="logo" width=250 height=250 />
 
 <h1>GTA Mod Manager</h1>
 <p>A sleek, purple-themed modding tool designed for effortless GTA V customization. Featuring an intuitive interface and a built-in mod manager, it streamlines the entire process, making mod installation fast, simple, and user-friendly. Perfect for newcomers and experienced modders alike.</p>

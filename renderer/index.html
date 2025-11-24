@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GTA V Mod Manager</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" />
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #020617;
+        color: #f5f5f5;
+        height: 100vh;
+        display: flex;
+      }
+
+      .app {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+      }
+
+      .sidebar {
+        width: 72px;
+        background: #020617;
+        border-right: 1px solid #111827;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 8px;
+        gap: 8px;
+      }
+
+      .sidebar-logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+      }
+
+      .sidebar-spacer {
+        flex: 1;
+      }
+
+      .sidebar-item {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        background: #020617;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #9ca3af;
+        transition: background 0.15s, border-color 0.15s, color 0.15s;
+      }
+
+      .sidebar-item:hover {
+        background: #0b1120;
+        border-color: #1f2937;
+        color: #e5e7eb;
+      }
+
+      .sidebar-item.active {
+        background: #111827;
+        border-color: #3b82f6;
+        color: #f9fafb;
+      }
+
+      .sidebar-button {
+        background: none;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        padding: 8px;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sidebar-button:hover {
+        background: #1f2937;
+        border-color: #38bdf8;
+      }
+
+      .sidebar-item-icon {
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sidebar-item-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+        max-width: 20px;
+        max-height: 20px;
+      }
+
+      .main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: radial-gradient(circle at top left, #111827, #020617 55%);
+      }
+
+      header {
+        padding: 14px 20px;
+        background: rgba(15, 23, 42, 0.95);
+        border-bottom: 1px solid #111827;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      main {
+        flex: 1;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow: hidden;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0;
+      }
+      .subtitle {
+        font-size: 12px;
+        color: #a0a4c0;
+      }
+      .card {
+        background: #020617;
+        border-radius: 10px;
+        border: 1px solid #111827;
+        padding: 16px 18px;
+      }
+      .card h2 {
+        font-size: 16px;
+        margin-top: 0;
+      }
+      .status-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+      .status-label {
+        color: #c0c4e0;
+      }
+      .status-value {
+        font-weight: 500;
+      }
+      .status-value img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        max-width: 16px;
+        max-height: 16px;
+        object-fit: contain;
+        vertical-align: middle;
+      }
+      .badge-ok {
+        color: #4ade80;
+      }
+      .badge-warn {
+        color: #f97373;
+      }
+      button {
+        border: none;
+        border-radius: 6px;
+        padding: 8px 14px;
+        font-size: 14px;
+        cursor: pointer;
+        background: #3b82f6;
+        color: white;
+      }
+      button.secondary {
+        background: #111827;
+        border: 1px solid #374151;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+      .buttons-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .log {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+        font-size: 12px;
+        max-height: 200px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        background: #020617;
+        border-radius: 6px;
+        border: 1px solid #111827;
+        padding: 8px 10px;
+      }
+
+      .tab-container {
+        display: flex;
+        flex: 1;
+        gap: 16px;
+        min-height: 0;
+      }
+
+      .tab {
+        flex: 1;
+        display: none;
+      }
+
+      .tab.active {
+        display: block;
+      }
+
+      .tab-grid {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .tab-grid > .card {
+        flex: 1;
+      }
+
+      .mod-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .mod-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px;
+        border: 1px solid #374151;
+        border-radius: 8px;
+        background: #111827;
+      }
+
+      .mod-thumb {
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+        object-fit: cover;
+        background: #1f2937;
+      }
+
+      .mod-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .mod-name {
+        font-weight: 600;
+        font-size: 15px;
+        color: #f3f4f6;
+      }
+
+      .mod-desc {
+        font-size: 13px;
+        color: #9ca3af;
+      }
+
+      .mod-version {
+        font-size: 12px;
+        color: #6b7280;
+      }
+
+      .install-mod-btn {
+        padding: 6px 14px;
+        font-size: 13px;
+      }
+
+      .about-text {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #d1d5db;
+        margin: 12px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-logo" title="GTA V Mod Manager">
+          <img src="../assets/GMA.svg" alt="GTA Mod Manager" style="width: 48px; height: 48px; object-fit: contain;" />
+        </div>
+        <div style="height: 12px;"></div>
+        <button class="sidebar-item active" data-tab="setup" title="Setup">
+          <span class="sidebar-item-icon">
+            <img src="../assets/settings.svg" alt="Setup" />
+          </span>
+        </button>
+        <button class="sidebar-item" data-tab="mods" title="Mod Manager">
+          <span class="sidebar-item-icon">
+            <img src="../assets/files.svg" alt="Mod Manager" />
+          </span>
+        </button>
+        <button class="sidebar-item" data-tab="about" title="About this project">
+          <span class="sidebar-item-icon">
+            <img src="../assets/aboutme.svg" alt="About" />
+          </span>
+        </button>
+        <div class="sidebar-spacer"></div>
+        <button class="sidebar-button" id="discordBtn" title="Join our Discord">
+          <span class="sidebar-item-icon">
+            <img src="../assets/discord.svg" alt="Discord" />
+          </span>
+        </button>
+      </aside>
+      <div class="main">
+        <header>
+          <div>
+            <h1>GTA V Mod Manager</h1>
+            <div class="subtitle">Base Electron UI · Setup & Mod Manager</div>
+          </div>
+          <div class="subtitle" id="statusBadge">Loading...</div>
+        </header>
+        <main>
+          <div class="tab-container">
+            <section class="tab active" id="tab-setup">
+              <div class="tab-grid">
+                <section class="card">
+                  <h2>Setup status</h2>
+                  <div class="status-row">
+                    <div class="status-label">File path</div>
+                    <div class="status-value" id="filePathStatus">❌</div>
+                  </div>
+                  <div class="subtitle" id="gamePath" style="margin-top:4px; word-break: break-all;">
+                    Not set
+                  </div>
+                  <div class="status-row" style="margin-top:10px;">
+                    <div class="status-label">Mods folder</div>
+                    <div class="status-value" id="modsStatus">❌</div>
+                  </div>
+                  <div class="status-row">
+                    <div class="status-label">ScriptHookV</div>
+                    <div class="status-value" id="scriptHookStatus">❌</div>
+                  </div>
+                  <div class="status-row">
+                    <div class="status-label">ASI loader</div>
+                    <div class="status-value" id="asiStatus">❌</div>
+                  </div>
+                  <div class="buttons-row" style="margin-top:14px;">
+                    <button id="refreshBtn" class="secondary">Refresh</button>
+                    <button id="installRequirementsBtn" class="secondary">Install requirements</button>
+                  </div>
+                  <h3 style="font-size:13px;margin-top:16px;margin-bottom:6px;">Activity log</h3>
+                  <div id="log" class="log"></div>
+                </section>
+              </div>
+            </section>
+            <section class="tab" id="tab-mods">
+              <section class="card">
+                <h3 style="font-size: 16px; margin-top:0;">Featured mods</h3>
+                <div class="mod-list">
+                  <div class="mod-item">
+                    <img class="mod-thumb" src="https://via.placeholder.com/80x80/1f2937/ffffff?text=MOD" alt="Mod thumbnail" />
+                    <div class="mod-info">
+                      <div class="mod-name">Example Mod</div>
+                      <div class="mod-desc">A short description of what this mod does.</div>
+                      <div class="mod-version">v1.2.3</div>
+                    </div>
+                    <button class="secondary install-mod-btn">Install</button>
+                  </div>
+                  <div class="mod-item">
+                    <img class="mod-thumb" src="https://via.placeholder.com/80x80/1f2937/ffffff?text=MOD" alt="Mod thumbnail" />
+                    <div class="mod-info">
+                      <div class="mod-name">Another Mod</div>
+                      <div class="mod-desc">Brief description of another cool mod.</div>
+                      <div class="mod-version">v4.5.6</div>
+                    </div>
+                    <button class="secondary install-mod-btn">Install</button>
+                  </div>
+                </div>
+              </section>
+              <section class="card" style="margin-top:16px;">
+                <h3 style="font-size: 16px; margin-top:0;">Installed mods</h3>
+                <p class="subtitle">No mods installed yet. Use the installer or copy mods into your mods folder.</p>
+              </section>
+            </section>
+            <section class="tab" id="tab-about">
+              <section class="card">
+                <h2>About this project</h2>
+                <p class="about-text">
+                  I began developing the GTA mod manager after noticing that many of my friends struggled with the manual modding process. To make things easier, I created this project as a simple and efficient solution for both myself and them, allowing everyone to enjoy GTA V without needing to learn the complexities of mod installation.
+                </p>
+                <p class="about-text">
+                  <strong>This project will always be free and if you bought this program you were scammed.</strong>
+                </p>
+                <div class="buttons-row" style="margin-top: 16px;">
+                  <button id="copyDiscordBtn" class="secondary">Copy Discord invite</button>
+                  <button id="openGithubBtn" class="secondary">Open GitHub</button>
+                </div>
+              </section>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>

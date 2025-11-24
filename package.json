@@ -1,0 +1,21 @@
+{
+  "name": "loader",
+  "version": "1.0.0",
+  "description": "GTA V Mod Manager (Electron base)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^39.2.3"
+  },
+  "dependencies": {
+    "unzipper": "^0.12.3"
+  }
+}

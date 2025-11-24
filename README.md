@@ -1,4 +1,4 @@
-<h1 align="center">GTA Mod Manager</h1>
+<h1 align="center">GMM | GTA V Mod Manager</h1>
 <p align="center">
 A sleek, purple-themed modding tool built for effortless GTA V customization. With a clean, modern interface and a fully integrated mod manager, it makes installing, managing, and using mods easier than ever—perfect for both beginners and experienced modders.
 </p>

@@ -23,14 +23,6 @@ GTA Mod Manager was created to simplify the modding process for GTA V. Many play
 ### 📸 Screenshots
 
 <div align="center">
-  <img src="https://media.discordapp.net/attachments/1235843767408398419/1442620683862675547/image.png?format=webp&quality=lossless&width=866&height=562" alt="screenshot-1" width="800"/>
-</div>
-
-<div align="center">
-  <img src="https://media.discordapp.net/attachments/1235843767408398419/1442620684147757106/image.png?format=webp&quality=lossless&width=868&height=562" alt="screenshot-2" width="800"/>
-</div>
-
-<div align="center">
   <img width="1085" height="691" alt="custom-1" src="https://github.com/user-attachments/assets/6283cadf-9a12-4d4a-8aef-8993b3832390" />
 </div>
 

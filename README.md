@@ -23,23 +23,14 @@ GTA Mod Manager was created to simplify the modding process for GTA V. Many play
 ### 📸 Screenshots
 
 <div align="center">
-  <img width="1085" height="691" alt="custom-1" src="https://github.com/user-attachments/assets/6283cadf-9a12-4d4a-8aef-8993b3832390" />
+  <img width="1084" height="692" alt="image" src="https://github.com/user-attachments/assets/0a24a3b3-9b37-4b2d-95fd-9f466dccc0d5" />
 </div>
+
 
 <div align="center">
-  <img width="1085" height="692" alt="custom-2" src="https://github.com/user-attachments/assets/3ccde3f8-ab19-44d0-a1a0-ec6c30426e2c" />
+  <img width="1083" height="692" alt="image" src="https://github.com/user-attachments/assets/e0c159cb-ea07-477c-bed8-4833251f543b" />
 </div>
 
-
----
-
-### 🎨 Color Reference
-| Color | Hex |
-|-------|-----|
-| Primary | ![#3930b6](https://via.placeholder.com/10/3930b6?text=+) `#3930b6` |
-| Secondary | ![#393E46](https://via.placeholder.com/10/393E46?text=+) `#393E46` |
-| Accent | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) `#00ADB5` |
-| Text | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) `#EEEEEE` |
 
 ---
 

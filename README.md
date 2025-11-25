@@ -32,10 +32,6 @@ GTA Mod Manager was created to simplify the modding process for GTA V. Many play
 </div>
 
 
----
-
-## 🧰 Getting Started
-
 ### ⚙️ Installation
 
 ```bash

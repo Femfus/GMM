@@ -13,7 +13,8 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "electron": "^39.2.3"
+    "electron": "^39.2.3",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
     "unzipper": "^0.12.3"

@@ -3,15 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <title>GTA V Mod Manager</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://discord.gg https://github.com https://www.gta5-mods.com;" />
     <style>
       body {
         margin: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        background: #020617;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #0a0a0a;
         color: #f5f5f5;
         height: 100vh;
-        display: flex;
+        overflow: hidden;
       }
 
       .app {
@@ -115,7 +116,7 @@
       }
 
       header {
-        padding: 14px 20px;
+        padding: 10px 20px;
         background: rgba(15, 23, 42, 0.95);
         border-bottom: 1px solid #111827;
         display: flex;
@@ -125,11 +126,11 @@
 
       main {
         flex: 1;
-        padding: 18px 20px;
+        padding: 12px 20px;
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        overflow: hidden;
+        gap: 12px;
+        overflow-y: auto;
       }
       h1 {
         font-size: 20px;
@@ -201,46 +202,73 @@
       }
       .log {
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-        font-size: 12px;
-        max-height: 200px;
+        font-size: 11px;
+        flex: 1;
+        min-height: 120px;
         overflow-y: auto;
         white-space: pre-wrap;
-        background: #020617;
+        background: #1a1a1a;
         border-radius: 6px;
-        border: 1px solid #111827;
-        padding: 8px 10px;
+        border: 1px solid #2a2a2a;
+        padding: 6px 8px;
       }
 
       .tab-container {
         display: flex;
         flex: 1;
         gap: 16px;
-        min-height: 0;
+        height: calc(100vh - 80px);
       }
 
       .tab {
         flex: 1;
         display: none;
+        height: calc(100vh - 80px);
       }
 
       .tab.active {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 80px);
       }
 
       .tab-grid {
         display: flex;
         flex: 1;
-        min-height: 0;
+        height: calc(100vh - 80px);
       }
 
       .tab-grid > .card {
         flex: 1;
+        display: flex;
+        flex-direction: column;
       }
 
       .mod-list {
         display: flex;
         flex-direction: column;
         gap: 12px;
+        max-height: 500px;
+        overflow-y: auto;
+        padding-right: 8px;
+      }
+
+      .mod-list::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .mod-list::-webkit-scrollbar-track {
+        background: #1f2937;
+        border-radius: 4px;
+      }
+
+      .mod-list::-webkit-scrollbar-thumb {
+        background: #4b5563;
+        border-radius: 4px;
+      }
+
+      .mod-list::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
       }
 
       .mod-item {
@@ -284,6 +312,23 @@
         color: #6b7280;
       }
 
+      .mod-meta {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-top: 4px;
+      }
+
+      .mod-downloads {
+        font-size: 11px;
+        color: #9ca3af;
+      }
+
+      .mod-item:hover {
+        transform: translateY(-2px);
+        border-color: #4b5563;
+      }
+
       .install-mod-btn {
         padding: 6px 14px;
         font-size: 13px;
@@ -295,9 +340,260 @@
         color: #d1d5db;
         margin: 12px 0;
       }
+
+      /* Professional Design System */
+      body {
+        background: #0f0f0f;
+        color: #e4e4e7;
+      }
+
+      .main {
+        background: #0f0f0f;
+      }
+
+      .card {
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        padding: 8px 12px;
+      }
+
+      .sidebar {
+        background: #0a0a0a;
+        border-right: 1px solid #1a1a1a;
+      }
+
+      .sidebar-item {
+        background: #0a0a0a;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        transition: all 0.15s ease-out;
+      }
+
+      .sidebar-item:hover {
+        background: #1a1a1a;
+        border-color: #2a2a2a;
+        transform: translateX(2px);
+      }
+
+      .sidebar-item.active {
+        background: #1e293b;
+        border-color: #3b82f6;
+        color: #f8fafc;
+      }
+
+      header {
+        background: #1a1a1a;
+        border-bottom: 1px solid #2a2a2a;
+      }
+
+      button {
+        background: #1e293b;
+        border: 1px solid #2a2a2a;
+        color: #e4e4e7;
+        transition: all 0.15s ease-out;
+        font-weight: 500;
+      }
+
+      button:hover {
+        background: #2a2a2a;
+        border-color: #3b82f6;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      button.secondary {
+        background: #1a1a1a;
+        border-color: #2a2a2a;
+      }
+
+      button.secondary:hover {
+        background: #2a2a2a;
+        border-color: #3b82f6;
+      }
+
+      .subtitle {
+        color: #a1a1aa;
+      }
+
+      /* Loading Screen - Professional */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0f0f0f;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.3s ease-out;
+      }
+
+      .loading-screen.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loading-logo {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 16px;
+        animation: logoPulse 1.5s ease-in-out infinite;
+      }
+
+      .loading-text {
+        font-size: 20px;
+        font-weight: 600;
+        color: #e4e4e7;
+        margin-bottom: 4px;
+        animation: fadeInUp 0.3s ease-out;
+      }
+
+      .loading-subtitle {
+        font-size: 13px;
+        color: #71717a;
+        animation: fadeInUp 0.3s ease-out 0.1s both;
+      }
+
+      .loading-spinner {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #2a2a2a;
+        border-top: 2px solid #3b82f6;
+        border-radius: 50%;
+        margin-top: 16px;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes logoPulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .loading-spinner {
+        animation: spin 0.8s linear infinite;
+      }
+
+      /* Snappy App entrance */
+      .app {
+        animation: appEntrance 0.4s ease-out;
+      }
+
+      @keyframes appEntrance {
+        from { opacity: 0; transform: scale(0.98); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      /* Snappy Tab transitions */
+      .tab {
+        transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+      }
+
+      .tab.active {
+        animation: tabSlideIn 0.25s ease-out;
+      }
+
+      @keyframes tabSlideIn {
+        from { opacity: 0; transform: translateX(10px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      /* Snappy Card animations */
+      .card {
+        transition: all 0.2s ease-out;
+        animation: cardEntrance 0.3s ease-out backwards;
+      }
+
+      .card:nth-child(1) { animation-delay: 0.05s; }
+      .card:nth-child(2) { animation-delay: 0.1s; }
+
+      @keyframes cardEntrance {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Snappy Mod items */
+      .mod-item {
+        transition: all 0.2s ease-out;
+        animation: modItemEntrance 0.3s ease-out backwards;
+      }
+
+      .mod-item:nth-child(1) { animation-delay: 0.02s; }
+      .mod-item:nth-child(2) { animation-delay: 0.04s; }
+      .mod-item:nth-child(3) { animation-delay: 0.06s; }
+      .mod-item:nth-child(4) { animation-delay: 0.08s; }
+
+      @keyframes modItemEntrance {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .mod-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Snappy Toggle buttons */
+      .toggle-btn {
+        transition: all 0.15s ease-out;
+      }
+
+      .toggle-btn:hover {
+        transform: scale(1.01);
+      }
+
+      #statusBadge {
+        transition: all 0.2s ease-out;
+      }
+
+      /* Professional scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #2a2a2a;
+        border-radius: 3px;
+        transition: background 0.15s ease-out;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3a3a3a;
+      }
     </style>
   </head>
   <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <img src="../assets/GMA.svg" alt="GTA V Mod Manager" class="loading-logo" />
+      <div class="loading-text">GTA V Mod Manager</div>
+      <div class="loading-subtitle">Loading your mod management experience...</div>
+      <div class="loading-spinner"></div>
+    </div>
+
     <div class="app">
       <aside class="sidebar">
         <div class="sidebar-logo" title="GTA V Mod Manager">
@@ -320,6 +616,11 @@
           </span>
         </button>
         <div class="sidebar-spacer"></div>
+        <button class="sidebar-button" id="openGithubBtn" title="View on GitHub">
+          <span class="sidebar-item-icon">
+            <img src="../assets/github.svg" alt="GitHub" />
+          </span>
+        </button>
         <button class="sidebar-button" id="discordBtn" title="Join our Discord">
           <span class="sidebar-item-icon">
             <img src="../assets/discord.svg" alt="Discord" />
@@ -329,8 +630,8 @@
       <div class="main">
         <header>
           <div>
-            <h1>GTA V Mod Manager</h1>
-            <div class="subtitle">Base Electron UI · Setup & Mod Manager</div>
+            <h1 id="headerTitle">Setup</h1>
+            <div class="subtitle" id="headerSubtitle">Configure your GTA V installation</div>
           </div>
           <div class="subtitle" id="statusBadge">Loading...</div>
         </header>
@@ -363,38 +664,37 @@
                     <button id="refreshBtn" class="secondary">Refresh</button>
                     <button id="installRequirementsBtn" class="secondary">Install requirements</button>
                   </div>
-                  <h3 style="font-size:13px;margin-top:16px;margin-bottom:6px;">Activity log</h3>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top:16px; margin-bottom:6px;">
+                    <h3 style="font-size:13px; margin:0;">Activity log</h3>
+                    <button id="clearLogBtn" class="secondary" style="font-size:11px; padding:4px 8px;">Clear</button>
+                  </div>
                   <div id="log" class="log"></div>
                 </section>
               </div>
             </section>
             <section class="tab" id="tab-mods">
-              <section class="card">
-                <h3 style="font-size: 16px; margin-top:0;">Featured mods</h3>
-                <div class="mod-list">
-                  <div class="mod-item">
-                    <img class="mod-thumb" src="https://via.placeholder.com/80x80/1f2937/ffffff?text=MOD" alt="Mod thumbnail" />
-                    <div class="mod-info">
-                      <div class="mod-name">Example Mod</div>
-                      <div class="mod-desc">A short description of what this mod does.</div>
-                      <div class="mod-version">v1.2.3</div>
-                    </div>
-                    <button class="secondary install-mod-btn">Install</button>
+              <section class="card" style="flex: 1; display: flex; flex-direction: column; background: #0f0f0f; border: 1px solid #1f1f1f;">
+                <div class="mods-toggle-container" style="display: flex; gap: 12px; margin-bottom: 20px;">
+                  <button id="showInstallerBtn" class="toggle-btn active" style="flex: 1; padding: 12px 16px; border: 1px solid #1e40af; background: #1e40af; color: white; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px;">📦 Mod Installer</button>
+                  <button id="showInstalledBtn" class="toggle-btn" style="flex: 1; padding: 12px 16px; border: 1px solid #1f1f1f; background: transparent; color: #6b7280; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px;">📋 Installed Mods</button>
+                </div>
+                
+                <div id="installerSection" style="flex: 1; display: flex; flex-direction: column;">
+                  <h3 style="font-size: 18px; margin-top:0; margin-bottom: 20px; color: #f3f4f6; font-weight: 600;">Featured mods</h3>
+                  <div class="search-filter-row" style="margin-bottom: 20px;">
+                    <input type="text" placeholder="Search mods..." style="flex: 1; padding: 12px 16px; border: 1px solid #1f1f1f; border-radius: 8px; background: #1a1a1a; color: #f3f4f6; font-size: 14px; outline: none; transition: border-color 0.2s;">
                   </div>
-                  <div class="mod-item">
-                    <img class="mod-thumb" src="https://via.placeholder.com/80x80/1f2937/ffffff?text=MOD" alt="Mod thumbnail" />
-                    <div class="mod-info">
-                      <div class="mod-name">Another Mod</div>
-                      <div class="mod-desc">Brief description of another cool mod.</div>
-                      <div class="mod-version">v4.5.6</div>
-                    </div>
-                    <button class="secondary install-mod-btn">Install</button>
+                  <div class="mod-list" style="flex: 1; overflow-y: auto; padding-right: 8px;">
+                    <!-- Mods will be loaded dynamically here -->
                   </div>
                 </div>
-              </section>
-              <section class="card" style="margin-top:16px;">
-                <h3 style="font-size: 16px; margin-top:0;">Installed mods</h3>
-                <p class="subtitle">No mods installed yet. Use the installer or copy mods into your mods folder.</p>
+                
+                <div id="installedModsSection" style="flex: 1; display: flex; flex-direction: column;">
+                  <h3 style="font-size: 18px; margin-top:0; margin-bottom: 20px; color: #f3f4f6; font-weight: 600;">Installed mods</h3>
+                  <div class="mod-list" style="flex: 1; overflow-y: auto; padding-right: 8px;">
+                    <!-- Installed mods will be loaded dynamically here -->
+                  </div>
+                </div>
               </section>
             </section>
             <section class="tab" id="tab-about">
@@ -403,12 +703,14 @@
                 <p class="about-text">
                   I began developing the GTA mod manager after noticing that many of my friends struggled with the manual modding process. To make things easier, I created this project as a simple and efficient solution for both myself and them, allowing everyone to enjoy GTA V without needing to learn the complexities of mod installation.
                 </p>
-                <p class="about-text">
-                  <strong>This project will always be free and if you bought this program you were scammed.</strong>
+                <p class="about-text" style="color: #ef4444; font-weight: bold; font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px; border: 2px solid #ef4444; padding: 12px; border-radius: 8px; background: rgba(239, 68, 68, 0.1);">
+                  ⚠️ This project is FREE! If you paid for it, you were SCAMMED! ⚠️
                 </p>
                 <div class="buttons-row" style="margin-top: 16px;">
-                  <button id="copyDiscordBtn" class="secondary">Copy Discord invite</button>
-                  <button id="openGithubBtn" class="secondary">Open GitHub</button>
+                  <button id="openGithubBtn" class="secondary" style="display: flex; align-items: center; gap: 8px;">
+                    <img src="../assets/github.svg" alt="GitHub" style="width: 16px; height: 16px; filter: brightness(0) invert(1);" />
+                    repo
+                  </button>
                 </div>
               </section>
             </section>
